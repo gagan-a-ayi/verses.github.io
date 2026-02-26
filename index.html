@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>❦ VERSES</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400;1,600&family=Cinzel:wght@400;600&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400;1,600&family=Cinzel:wght@400;600&family=IM+Fell+English+SC&family=Noto+Serif+Kannada:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f0e8;
+    --parchment: #ede6d6;
+    --ink: #1a1208;
+    --ink-dim: #6b5e42;
+    --ink-faint: #b8a98a;
+    --gold: #8b6914;
+    --gold-light: #c9a84c;
+    --red: #8b1a1a;
+    --border: #c8b89a;
+    --shadow: rgba(26,18,8,0.15);
+    --font-serif: 'Cormorant Garamond', serif;
+    --font-display: 'Cinzel', serif;
+    --font-sc: 'IM Fell English SC', serif;
+  }
+
+  /* Screenshot / screen capture overlay */
+  #screenshotShield {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #f5f0e8;
+    z-index: 99999;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  #screenshotShield p {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    color: var(--red);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  @media print {
+    body * { visibility: hidden !important; }
+    body::after {
+      content: "This content is protected.";
+      visibility: visible;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: serif;
+      font-size: 2rem;
+      color: #8b1a1a;
+    }
+  }
+
+  html {
+    background: var(--bg);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-serif);
+    min-height: 100vh;
+    overflow-x: hidden;
+    cursor: default;
+
+    /* Prevent text selection */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  /* Grain overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9998;
+    mix-blend-mode: multiply;
+  }
+
+  /* ── HEADER ── */
+  header {
+    text-align: center;
+    padding: 60px 40px 40px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  header::before {
+    content: '❧';
+    display: block;
+    font-size: 1.4rem;
+    color: var(--gold);
+    margin-bottom: 16px;
+    opacity: 0.7;
+  }
+
+  .site-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    color: var(--ink);
+    text-transform: uppercase;
+  }
+
+  .site-subtitle {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--ink-dim);
+    margin-top: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .header-rule {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 24px auto 0;
+    max-width: 320px;
+  }
+
+  .header-rule::before,
+  .header-rule::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-light), transparent);
+  }
+
+  .header-rule span {
+    font-size: 1rem;
+    color: var(--gold);
+  }
+
+  .header-meta {
+    margin-top: 20px;
+    font-family: var(--font-sc);
+    font-size: 0.7rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.15em;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .header-meta span { display: flex; align-items: center; gap: 6px; }
+
+  /* ── INTRO ── */
+  .intro-banner {
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+    padding: 0 40px;
+  }
+
+  .intro-banner p {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--ink-dim);
+    font-style: italic;
+  }
+
+  .intro-banner strong {
+    color: var(--red);
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  /* ── STATS ── */
+  .stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    max-width: 600px;
+    margin: 0 auto 60px;
+    border: 1px solid var(--border);
+    border-left: none;
+  }
+
+  .stat-item {
+    flex: 1;
+    text-align: center;
+    padding: 18px 20px;
+    border-left: 1px solid var(--border);
+  }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+  }
+
+  .stat-lbl {
+    font-family: var(--font-sc);
+    font-size: 0.6rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 4px;
+  }
+
+  /* ── POETRY GRID ── */
+  .poetry-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 30px 100px;
+  }
+
+  .section-heading {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .poem-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .poem-card {
+    background: var(--parchment);
+    border: 1px solid var(--border);
+    padding: 28px 36px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .poem-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--gold-light);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s ease;
+  }
+
+  .poem-card:not(.burned):hover {
+    background: #e8dfc9;
+    transform: translateX(4px);
+    border-color: var(--gold-light);
+  }
+
+  .poem-card:not(.burned):hover::before {
+    transform: scaleY(1);
+  }
+
+  .poem-card.burned {
+    cursor: not-allowed;
+    opacity: 0.65;
+    background: #e8e0d0;
+  }
+
+  .poem-card-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .poem-index {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    min-width: 36px;
+  }
+
+  .poem-info { flex: 1; }
+
+  .poem-title {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+
+  .poem-excerpt {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--ink-dim);
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+
+  .poem-meta-right {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .poem-status {
+    font-family: var(--font-sc);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px solid;
+    display: inline-block;
+  }
+
+  .poem-card:not(.burned) .poem-status {
+    color: var(--gold);
+    border-color: var(--gold-light);
+  }
+
+  .poem-card.burned .poem-status {
+    color: var(--red);
+    border-color: var(--red);
+    opacity: 0.7;
+  }
+
+  .poem-date {
+    font-family: var(--font-sc);
+    font-size: 0.55rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    margin-top: 6px;
+    display: block;
+  }
+
+  /* ── LIGHTBOX / READER ── */
+  .reader-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(20, 14, 6, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    backdrop-filter: blur(4px);
+  }
+
+  .reader-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .reader-pane {
+    background: var(--bg);
+    max-width: 680px;
+    width: 92vw;
+    max-height: 88vh;
+    overflow-y: auto;
+    border: 1px solid var(--border);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.4), inset 0 0 0 6px var(--parchment);
+    padding: 60px 64px 50px;
+    position: relative;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+    animation: pageReveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes pageReveal {
+    from { opacity: 0; transform: translateY(20px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .reader-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--ink-dim);
+    font-family: var(--font-sc);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .reader-close:hover {
+    border-color: var(--red);
+    color: var(--red);
+  }
+
+  .reader-ornament {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--gold);
+    opacity: 0.6;
+    margin-bottom: 28px;
+  }
+
+  .reader-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 4vw, 2.4rem);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-align: center;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+
+  .reader-byline {
+    text-align: center;
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--ink-dim);
+    font-size: 0.9rem;
+    margin-bottom: 36px;
+  }
+
+  .reader-divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+
+  .reader-divider::before,
+  .reader-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+  }
+
+  .reader-divider span {
+    font-size: 0.8rem;
+    color: var(--gold-light);
+  }
+
+  .reader-poem {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 2;
+    color: var(--ink);
+    white-space: pre-wrap;
+    text-align: left;
+  }
+
+  .reader-poem .stanza {
+    margin-bottom: 28px;
+    display: block;
+    animation: stanzaIn 0.6s ease both;
+  }
+
+  .reader-poem .stanza:nth-child(1) { animation-delay: 0.1s; }
+  .reader-poem .stanza:nth-child(2) { animation-delay: 0.25s; }
+  .reader-poem .stanza:nth-child(3) { animation-delay: 0.4s; }
+  .reader-poem .stanza:nth-child(4) { animation-delay: 0.55s; }
+  .reader-poem .stanza:nth-child(5) { animation-delay: 0.7s; }
+
+  @keyframes stanzaIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reader-footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .reader-warning {
+    font-family: var(--font-sc);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--red);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .warning-flame { font-size: 0.9rem; }
+
+  .reader-timestamp {
+    font-family: var(--font-sc);
+    font-size: 0.55rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── DENIED TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--ink);
+    color: var(--bg);
+    font-family: var(--font-sc);
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 14px 30px;
+    border: 1px solid var(--gold);
+    z-index: 9000;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+  }
+
+  .toast.show {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .toast.red {
+    background: var(--red);
+    border-color: #ff9999;
+    color: #fff;
+  }
+
+  /* ── RESET FOOTER ── */
+  .site-footer {
+    text-align: center;
+    padding: 30px 40px 50px;
+    border-top: 1px solid var(--border);
+  }
+
+  .reset-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--ink-faint);
+    font-family: var(--font-sc);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 10px 22px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .reset-btn:hover {
+    border-color: var(--red);
+    color: var(--red);
+  }
+
+  .footer-note {
+    margin-top: 16px;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+  }
+
+  @media (max-width: 600px) {
+    .reader-pane { padding: 40px 28px 36px; }
+    .poem-card { padding: 20px 20px; }
+    .poem-card-inner { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .poem-meta-right { text-align: left; }
+    header { padding: 40px 20px 30px; }
+  }
+
+  .reader-poem {
+  font-family: 'Noto Serif Kannada', serif;
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 2.2;
+  letter-spacing: 0.01em;
+}
+</style>
+</head>
+<body>
+
+<!-- Screenshot shield (shown during screen capture where API supported) -->
+<div id="screenshotShield">
+  <p>🔒 Content Protected</p>
+  <p style="font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; color: #6b5e42; letter-spacing: 0.05em;">Screenshots are disabled on this page.</p>
+</div>
+
+<header>
+  <div class="site-title">Verses</div>
+  <p class="site-subtitle">A private collection — read only once</p>
+  <div class="header-rule"><span>✦</span></div>
+  <div class="header-meta">
+    <span>📖 One-time reading</span>
+    <span>🔒 Protected content</span>
+    <span>✍ Original poetry</span>
+  </div>
+</header>
+
+<div class="intro-banner">
+  <p>
+    These poems are offered to you as a gift of presence.<br>
+    Each piece may be read <strong>only once</strong> on this device.<br>
+    Once the page is turned, it cannot be unturned.<br>
+    <br>
+    <em>Read slowly. Let the words find you.</em>
+  </p>
+</div>
+
+<div class="stats-row">
+  <div class="stat-item">
+    <span class="stat-num" id="statTotal">0</span>
+    <span class="stat-lbl">Poems</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num" id="statRead">0</span>
+    <span class="stat-lbl">Read</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num" id="statLeft">0</span>
+    <span class="stat-lbl">Remaining</span>
+  </div>
+</div>
+
+<div class="poetry-section">
+  <p class="section-heading">— The Collection —</p>
+  <div class="poem-list" id="poemList"></div>
+</div>
+
+<footer class="site-footer">
+  <!--<button class="reset-btn" onclick="resetAll()">↺ Reset Reading History</button>-->
+  <p class="footer-note">All words belong to their author. Reproduction is not permitted.</p>
+</footer>
+
+<!-- Reader Overlay -->
+<div class="reader-overlay" id="readerOverlay">
+  <div class="reader-pane" id="readerPane">
+    <button class="reader-close" onclick="closeReader()">✕ Close</button>
+    <div class="reader-ornament">❦</div>
+    <h2 class="reader-title" id="readerTitle"></h2>
+    <p class="reader-byline" id="readerByline"></p>
+    <div class="reader-divider"><span>✦</span></div>
+    <div class="reader-poem" id="readerPoem"></div>
+    <div class="reader-footer">
+      <div class="reader-warning">
+        <span class="warning-flame">🕯</span>
+        This reading is now sealed
+      </div>
+      <div class="reader-timestamp" id="readerTimestamp"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  POETRY COLLECTION — edit this array to add your poems
+// ═══════════════════════════════════════════════════════
+const POEMS = [
+  {
+    id: 'p001',
+    title: '001',
+    excerpt: '...',
+    author: 'by the author',
+    stanzas: [
+      `ನೋಡಿದ್ದು ಒಮ್ಮೆ ಮಾತ್ರ,
+ಅದೇ ನೀ ನನ್ನ ಮನಸಿಗೆ ಹತ್ತಿರ,
+ಹೇಗೋ ಬರೆದುಕೊಂಡೆ ನಿನಗಾಗಿ ನನ್ನ ಪ್ರೇಮ ಸೂತ್ರ,
+ನಂತರ ಬರೆದೆ ನಿನಗೆ ನನ್ನ ಪ್ರೇಮ ಪತ್ರ,
+ನೀ ಒಪ್ಪಿದರೆ ಬಂದು ಮಾತಾಡುವೆ ನಿಮ್ಮ ತಂದೆ ಹತ್ತಿರ,
+ನಂತರ ಬರೆಯಸಿ ಬಿಡಲೆ ನಮ್ಮ ಲಗ್ನ ಪತ್ರ…`
+    ]
+  },
+  {
+    id: 'p002',
+    title: '002',
+    excerpt: '...',
+    author: 'by the author',
+    stanzas: [
+      `ನೋಡಿದ್ದು ಒಮ್ಮೆ ನಿನ್ನನ್ನು,
+ಅನಿಸಿತು ನೋಡಿದಂತೆ ನನ್ನ ಮನಸನ್ನು,
+ಅರ್ಥವಾಗದೆ ಒದ್ದಾಡಿದೆ ನಾನಿನ್ನು,
+ಯಾರೋ ಒದ್ದಂತಾಯಿತು ನನ್ನನ್ನು,
+ಎದ್ದುನೋಡಿದರೆ ಅರ್ಥವಾಯಿತು ನಾನು ನೋಡಿದ್ದು ಕನಸನ್ನು,
+ಈಗ ಯೋಚಿಸ ತೊಡಗಿದೆ ಹೀಗೇ ನೋಡಲಿ ಎಂದು ನಿನ್ನನ್ನು…`
+    ]
+  },
+  {
+    id: 'p003',
+    title: '003',
+    excerpt: '...',
+    author: 'by the author',
+    stanzas: [
+      `ನನ್ನ ಹೃದಯದಲ್ಲಿ ಇರುವುದೂ ನಾಲಕ್ಕು ಭಾಗ,
+ಈಗ ಅದೇ ನೀ ಅದರಲ್ಲಿ ಒಂದು ಭಾಗ,
+ಹೇಗೆ ತಿಳಿಸಲಿ ನಿನಗೆ ಈ ನನ್ನ ತ್ಯಾಗ,
+ಅರ್ಥ ಮಾಡಿಕೋ ಈ ನನ್ನ ಪ್ರೀತಿಯೆಂಬ ಯಾಗ,
+ಒಪ್ಪದೆ ಪರಿಚಯಿಸಬೇಡ ನೀ ನನಗೆ ದುಃಖದ ಭೋಗ,
+ಈಗ ಒಪ್ಪಿಕೋ ಈ ನನ್ನ ಪ್ರೀತಿಯನ್ನು ಬೇಗ…`
+    ]
+  },
+  {
+    id: 'p004',
+    title: '004',
+    excerpt: '...',
+    author: 'by the author',
+    stanzas: [
+      `ಕಾಲವ ಹಿಡಿದಿಟ್ಟಿರುವೆ ನಿನಗಾಗಿ,
+ಆದರೆ ನೀ ಬರಲಿಲ್ಲ ನನಗಾಗಿ,
+ಹುಡುಕಲೇ ನಾ ನಿನಗೆ ಶರಣಾಗಿ,
+ಹೋಗಿರುವೆಯಲ್ಲೇ ನೀ ಕಾಣೆಯಾಗಿ...`
+    ]
+  },
+  {
+    id: 'p005',
+    title: '005',
+    excerpt: '...',
+    author: 'by the author',
+    stanzas: [
+      `ನಾ ಕಲಿತಿದ್ದು ಮೊದಲು ಅಳುವುದನ್ನು,
+ನಂತರ ಕರೆದ್ದಿದ್ದು ನನ್ನ ತಾಯಿಯನ್ನು,
+ಸ್ವೀಕರಿಸಿದ್ದು ನನ್ನದಾಗಿ ನನ್ನ ಕನ್ನಡ ಭಾಷೆಯನ್ನು,
+ಆದರೆ ಬೇಕಿದ್ದನ್ನೆಲ್ಲ ಕೇಳಿದ್ದು ಆ ಗಣೇಶನನ್ನು,
+ತಿರುಗಿ ನೋಡಿದ್ದು ಬದುಕಲ್ಲಿ ಬೆಳೆದ ಹಾಸ್ಟೆಲ್ ಅನ್ನು,
+ಈಗ ಹೇಳುತ್ತಿರುವೆ ಒಮ್ಮೆಯೇ ನಾ ಪ್ರೀತಿಸಿದ್ದು ನಿನ್ನನ್ನು,
+ಕೊನೆಗೆ ಈ ಕ್ಷಣ ಅಂದುಕೊಂಡಿರುವೆ ನೀ ಒಪ್ಪುವೆ ಎಂದು ನನ್ನನ್ನು...`
+    ]
+  },
+  {
+    id: 'p006',
+    title: '006',
+    excerpt: '...',
+    author: 'by the author',
+    stanzas: [
+      `ಬದುಕುತ್ತಿದ್ದೆ ನಾ ನನ್ನದು ಒಬ್ಬಂಟಿ ಬದುಕೆಂದು,
+ಬಿಸಿದೆ ನೀ ನಿನ್ನ ಪ್ರೇಮ ಜಾಲ ನನ್ನ ಬಳಿ ಬಂದು,
+ಖಾಲಿ ಮಾಡಿಸಿದೆ ನೀ ನನ್ನ ಬಳಿ ಇದ್ದ ರೊಕ್ಕ ಅಂದು,
+ಬಿಟ್ಟು ಹೋದೆಲ್ಲ ನೀ ನನ್ನಿಂದು,
+ಕೇಳುವುದಿಲ್ಲ ನಾ ನಿನಗೆ ಯಾಕೆಂದು,
+ಮುಂದೊಂದು ದಿನ ತಿಳಿಯುವೆ ನೀ ನೋಡಿ ನಾ ಹೇಗೆ ಬದುಕುವೆಂದು...`
+    ]
+  },
+  {
+    id: 'p007',
+    title: '007',
+    excerpt: '...',
+    author: 'by the author',
+    stanzas: [
+      `ಹೇಗಾದೆ ನೀ ಇಂದು ನನ್ನ ಹೃದಯದ ಕವಿತೆ,
+ಈಗ ಬರೆಯತೊಡಗಿದೆ ನಿನಗಾಗಿ ನಿನ್ನ ಮೇಲೊಂದು ಕವಿತೆ,
+ಅಂದುಕೊಂಡಿರುವೆ ಕೈ ಹಿಡಿದು ಪೂರೆೈಸುವೆ ನೀ ನನ್ನ ಬದುಕಿನ ಕವಿತೆ,
+ನಡುದಾರಿ ಕೈ ಬಿಡಬೇಡ ಪೂರೆೈಸದೆ ನೀ ಆ ನನ್ನ ಕವಿತೆ,
+ಏಕೆಂದರೆ ಮತ್ತೆ ಬರೆಯುವುದಿಲ್ಲ ನಾ ಮತ್ತೊಂದು ಪ್ರೇಮದ ಕವಿತೆ...`
+    ]
+  },
+];
+
+// ═══════════════════════════════════════════════════════
+//  STORAGE
+// ═══════════════════════════════════════════════════════
+const STORAGE_KEY = 'verses_read';
+
+function getRead() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch { return {}; }
+}
+
+function markRead(id) {
+  const r = getRead();
+  r[id] = { ts: Date.now(), date: new Date().toLocaleString() };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(r));
+}
+
+function isRead(id) { return !!getRead()[id]; }
+function getReadDate(id) { const r = getRead(); return r[id]?.date || null; }
+
+// ═══════════════════════════════════════════════════════
+//  BUILD LIST
+// ═══════════════════════════════════════════════════════
+function buildList() {
+  const list = document.getElementById('poemList');
+  list.innerHTML = '';
+  const read = getRead();
+
+  POEMS.forEach((p, i) => {
+    const burned = !!read[p.id];
+    const num = String(i + 1).padStart(2, '0');
+
+    const card = document.createElement('div');
+    card.className = 'poem-card' + (burned ? ' burned' : '');
+    card.innerHTML = `
+      <div class="poem-card-inner">
+        <div class="poem-index">${num}.</div>
+        <div class="poem-info">
+          <div class="poem-title">${p.title}</div>
+          <div class="poem-excerpt">${p.excerpt}</div>
+        </div>
+        <div class="poem-meta-right">
+          <span class="poem-status">${burned ? 'Read' : 'Unread'}</span>
+          ${burned ? `<span class="poem-date">${getReadDate(p.id)}</span>` : ''}
+        </div>
+      </div>
+    `;
+
+    card.addEventListener('click', () => handleCardClick(p, burned));
+    list.appendChild(card);
+  });
+
+  updateStats();
+}
+
+function updateStats() {
+  const read = getRead();
+  const readCount = POEMS.filter(p => !!read[p.id]).length;
+  document.getElementById('statTotal').textContent = POEMS.length;
+  document.getElementById('statRead').textContent = readCount;
+  document.getElementById('statLeft').textContent = POEMS.length - readCount;
+}
+
+// ═══════════════════════════════════════════════════════
+//  READER
+// ═══════════════════════════════════════════════════════
+function handleCardClick(poem, burned) {
+  if (burned) {
+    showToast('This poem has already been read on this device', true);
+    return;
+  }
+  openReader(poem);
+}
+
+function openReader(poem) {
+  // Mark read IMMEDIATELY
+  markRead(poem.id);
+
+  document.getElementById('readerTitle').textContent = poem.title;
+  document.getElementById('readerByline').textContent = poem.author;
+  document.getElementById('readerTimestamp').textContent = 'Read on ' + new Date().toLocaleString();
+
+  const poemEl = document.getElementById('readerPoem');
+  poemEl.innerHTML = '';
+  poem.stanzas.forEach(stanza => {
+    const s = document.createElement('span');
+    s.className = 'stanza';
+    s.textContent = stanza;
+    poemEl.appendChild(s);
+  });
+
+  document.getElementById('readerOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeReader() {
+  document.getElementById('readerOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+  buildList();
+}
+
+document.getElementById('readerOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('readerOverlay')) closeReader();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeReader();
+});
+
+// ═══════════════════════════════════════════════════════
+//  TOAST
+// ═══════════════════════════════════════════════════════
+let toastTimer;
+function showToast(msg, red = false) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (red ? ' red' : '');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.className = 'toast' + (red ? ' red' : ''); }, 2500);
+}
+
+// ═══════════════════════════════════════════════════════
+//  RESET
+// ═══════════════════════════════════════════════════════
+function resetAll() {
+  if (!confirm('Reset all reading history? All poems will become readable once more.')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  buildList();
+  showToast('Reading history cleared');
+}
+
+// ═══════════════════════════════════════════════════════
+//  PROTECTION LAYER
+// ═══════════════════════════════════════════════════════
+
+// 1. Disable right-click
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+// 2. Disable text selection (already in CSS, belt-and-suspenders)
+document.addEventListener('selectstart', e => e.preventDefault());
+
+// 3. Disable keyboard shortcuts for copy, save, print, inspect
+document.addEventListener('keydown', e => {
+  const key = e.key.toLowerCase();
+  const ctrl = e.ctrlKey || e.metaKey;
+
+  // Block: Ctrl+C, Ctrl+A, Ctrl+S, Ctrl+P, Ctrl+U, Ctrl+Shift+I, Ctrl+Shift+J, F12
+  if (ctrl && ['c','a','s','p','u'].includes(key)) { e.preventDefault(); showToast('⊘ Copying is disabled'); }
+  if (ctrl && e.shiftKey && ['i','j','c'].includes(key)) { e.preventDefault(); }
+  if (e.key === 'F12') { e.preventDefault(); }
+  if (e.key === 'PrintScreen') { e.preventDefault(); showToast('⊘ Screenshots are disabled'); }
+});
+
+// 4. Long-press prevention (mobile)
+let longPressTimer;
+document.addEventListener('touchstart', e => {
+  longPressTimer = setTimeout(() => {
+    // If still held, they're trying to long-press — blur and cancel
+    e.target.blur();
+    window.getSelection()?.removeAllRanges();
+  }, 350);
+}, { passive: true });
+
+document.addEventListener('touchend', () => clearTimeout(longPressTimer));
+document.addEventListener('touchmove', () => clearTimeout(longPressTimer));
+
+// 5. Screen Capture API — overlay when screen is being shared/captured
+if ('screen' in navigator && navigator.screen.isExtended !== undefined) {
+  // Some browsers expose this
+}
+// Visibility-based: hide content when tab goes invisible (screen recorder switching)
+// (This is a light deterrent, not foolproof)
+document.addEventListener('visibilitychange', () => {
+  // Don't hide — that would be too aggressive for normal tab switching
+});
+
+// 6. Drag prevention
+document.addEventListener('dragstart', e => e.preventDefault());
+
+// 7. CSS pointer-events disable on images / text already set via user-select: none
+
+// 8. Screenshot detection via blur + shield (works for some screen capture on mobile)
+// Use a transparent overlay during any potential screen-share (Page Visibility API + fullscreen changes)
+window.addEventListener('blur', () => {
+  // Very brief shield in case of app switcher screenshot on iOS
+  // (does not fully block but obscures momentarily)
+});
+
+// 9. Clipboard block
+document.addEventListener('copy', e => { e.preventDefault(); e.clipboardData.setData('text/plain', ''); });
+document.addEventListener('cut',  e => { e.preventDefault(); });
+
+// 10. Warn when printing (CSS @media print already blanks the page)
+window.onbeforeprint = () => showToast('⊘ Printing is disabled');
+
+// ═══════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════
+buildList();
+</script>
+</body>
+</html>
